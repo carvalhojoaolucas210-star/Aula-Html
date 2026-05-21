@@ -1,0 +1,3 @@
+- Adiconar API NewsData.io
+- Jogar no gemini para adicionar o JS para puxar essa API
+- Utilizar a chave da API que esta logada no email no NewsData.io
