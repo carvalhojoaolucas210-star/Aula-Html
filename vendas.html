@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venda de Anúncios - Portal Uberlândia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Espaço Publicitário</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Voltar para a Página Inicial</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Solicite um Orçamento de Anúncio</h2>
+            <form action="#">
+                <p>
+                    <label>Nome da Empresa</label>
+                    <input type="text" name="empresa" required>
+                </p>
+                <p>
+                    <label>Tipo de Anúncio</label>
+                    <select name="tipo">
+                        <option value="banner_topo">Banner de Topo</option>
+                        <option value="lateral">Barra Lateral</option>
+                        <option value="publieditorial">Notícia Patrocinada</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Duração do anúncio (em dias)</label>
+                    <input type="number" name="dias" min="1" max="30" placeholder="Ex: 7">
+                </p>
+                <p>
+                    <label>Data pretendida para início</label>
+                    <input type="date" name="data_inicio">
+                </p>
+                <p>
+                    <label>Investimento pretendido</label>
+                    <div style="display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; font-family:var(--font-ui); font-size:.9rem; color:var(--muted);">
+                        <span>R$ 100</span>
+                        <input type="range" name="investimento" min="100" max="5000" style="flex:1; min-width:160px;">
+                        <span>R$ 5.000</span>
+                    </div>
+                </p>
+                <button type="submit">Enviar Solicitação</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
+    </footer>
+
+</body>
+</html>

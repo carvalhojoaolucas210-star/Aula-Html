@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados do Anúncio - Portal Uberlândia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Configuração do Anúncio</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Voltar para a Página Inicial</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Detalhes Técnicos da Publicidade</h2>
+            <form action="#">
+                <p>
+                    <label>Link de destino (URL)</label>
+                    <input type="url" name="url_destino" placeholder="https://seu-site.com.br" required>
+                </p>
+                <p>
+                    <label>Cor predominante da arte</label>
+                    <input type="color" name="cor_arte" value="#004a80">
+                </p>
+                <p>
+                    <label>Arquivo da imagem (Banner)</label>
+                    <input type="file" name="arquivo_banner" accept="image/*">
+                </p>
+                <p>
+                    <label>Senha para acompanhar as métricas</label>
+                    <input type="password" name="senha_painel" required>
+                </p>
+                <p>
+                    <div class="check-group">
+                        <span>
+                            <input type="checkbox" name="termos" id="termos" required>
+                            <label for="termos" style="display:inline; text-transform:none; font-size:.93rem; font-weight:400;">Estou de acordo com as políticas de publicidade do portal.</label>
+                        </span>
+                    </div>
+                </p>
+                <button type="submit">Salvar Configurações</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
+    </footer>
+
+</body>
+</html>

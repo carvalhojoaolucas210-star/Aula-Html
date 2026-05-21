@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Portal Uberlândia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Fale Conosco</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Voltar para a Página Inicial</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Envie sua mensagem ou sugestão</h2>
+            <form action="#">
+                <p>
+                    <label>Seu Nome</label>
+                    <input type="text" name="nome_contato" required>
+                </p>
+                <p>
+                    <label>Assunto</label>
+                    <select name="assunto">
+                        <option value="sugestao">Sugestão de Pauta</option>
+                        <option value="elogio">Elogio / Crítica</option>
+                        <option value="erro">Relatar Erro no Site</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Mensagem</label>
+                    <textarea name="mensagem" rows="5" required></textarea>
+                </p>
+                <p>
+                    <label>Telefone</label>
+                    <input type="tel" name="telefone" placeholder="(34) 9 0000-0000">
+                </p>
+                <p>
+                    <label>Como prefere ser respondido?</label>
+                    <div class="radio-group">
+                        <span><input type="radio" name="resposta" value="email"> E-mail</span>
+                        <span><input type="radio" name="resposta" value="tel"> Telefone</span>
+                    </div>
+                </p>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
+    </footer>
+
+</body>
+</html>

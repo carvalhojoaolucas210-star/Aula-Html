@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes - Portal Uberlândia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Área do Leitor</h1>
+        <p>Cadastre-se para receber notícias exclusivas de Uberlândia</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Voltar para a Página Inicial</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Cadastro de Novo Cliente</h2>
+            <form action="#">
+                <p>
+                    <label>Nome Completo</label>
+                    <input type="text" name="nome_cliente" placeholder="Digite seu nome" required>
+                </p>
+                <p>
+                    <label>E-mail</label>
+                    <input type="email" name="email_cliente" placeholder="seu@email.com" required>
+                </p>
+                <p>
+                    <label>Data de Nascimento</label>
+                    <input type="date" name="data_nascimento">
+                </p>
+                <p>
+                    <label>Gênero</label>
+                    <div class="radio-group">
+                        <span><input type="radio" name="genero" value="m"> Masculino</span>
+                        <span><input type="radio" name="genero" value="f"> Feminino</span>
+                        <span><input type="radio" name="genero" value="o"> Outro</span>
+                    </div>
+                </p>
+                <p>
+                    <label>Setor de Uberlândia onde mora</label>
+                    <select name="bairro">
+                        <option value="centro">Centro</option>
+                        <option value="santa_monica">Santa Mônica</option>
+                        <option value="martins">Martins</option>
+                        <option value="umuarama">Umuarama</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </p>
+                <button type="submit">Efetuar Cadastro</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
+    </footer>
+
+</body>
+</html>

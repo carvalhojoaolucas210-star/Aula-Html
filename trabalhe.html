@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhe Conosco - Portal Uberlândia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Faça Parte da Nossa Equipe</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Voltar para a Página Inicial</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Cadastro de Candidatos</h2>
+            <form action="#">
+                <p>
+                    <label>Área de interesse</label>
+                    <select name="area">
+                        <option value="redacao">Redação / Jornalismo</option>
+                        <option value="fotografia">Fotografia / Vídeo</option>
+                        <option value="ti">Tecnologia / TI</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Anos de experiência</label>
+                    <input type="number" name="experiencia" min="0" placeholder="0">
+                </p>
+                <p>
+                    <label>Link do seu Portfólio</label>
+                    <input type="url" name="portfolio" placeholder="https://seuportfolio.com">
+                </p>
+                <p>
+                    <label>Disponibilidade para início imediato?</label>
+                    <div class="radio-group">
+                        <span><input type="radio" name="inicio" value="sim"> Sim</span>
+                        <span><input type="radio" name="inicio" value="nao"> Não</span>
+                    </div>
+                </p>
+                <p>
+                    <label>Fale um pouco sobre você</label>
+                    <textarea name="resumo" rows="6"></textarea>
+                </p>
+                <button type="submit">Enviar Currículo</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
+    </footer>
+
+</body>
+</html>

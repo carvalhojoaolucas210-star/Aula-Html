@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Uberlândia Notícias - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Portal Uberlândia Notícias</h1>
+        <p>A sua fonte diária de informações sobre o Triângulo Mineiro</p>
+        <img src="logo.png" alt="Logo do Portal">
+    </header>
+
+    <nav>
+        <ul>
+            <li><strong>Institucional:</strong>
+                <a href="index.html">Home</a> |
+                <a href="sobre.html">Sobre Nós</a> |
+                <a href="faq.html">FAQ</a> |
+                <a href="glossario.html">Glossário Jornalístico</a>
+            </li>
+            <li><strong>Cadastros:</strong>
+                <a href="clientes.html">Cadastro Clientes</a> |
+                <a href="vendas.html">Vendas de Anúncios</a> |
+                <a href="contato.html">Contato</a> |
+                <a href="anuncio.html">Dados do Anúncio</a> |
+                <a href="trabalhe.html">Trabalhe Conosco</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Destaques da Semana em Uberlândia</h2>
+            <ol>
+                <li><a href="ips-triangulo-mineiro.html">Uberlândia, Uberaba e Araguari formam "corredor de excelência" no Índice de Progresso Social 2026.</a></li>
+                <li><a href="figurinhas-uberlandia.html">Guia completo: onde trocar figurinhas em Uberlândia — confira os pontos, horários e dicas dos colecionadores.</a></li>
+                <li>Novo parque tecnológico é inaugurado no setor leste.</li>
+                <li>Time de vôlei local vence o campeonato regional.</li>
+                <li>Exposição de arte no Mercado Municipal começa amanhã.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Radar Tecnológico: Inteligência Artificial</h2>
+            <ul id="noticias-ia">
+                <li>Carregando últimas notícias...</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
+    </footer>
+
+    <script>
+        async function carregarNoticiasIA() {
+            // Lembre-se de substituir YOUR_API_KEY pela sua chave da NewsData.io!
+            const url = 'https://newsdata.io/api/1/latest?apikey=pub_9af72661c06747239aa4acb3e2af3b20&q=inteligencia%20artificial';
+            const listaNoticias = document.getElementById('noticias-ia');
+
+            try {
+                // Faz a requisição HTTP para a API
+                const resposta = await fetch(url);
+                const dados = await resposta.json();
+
+                // Limpa a mensagem de "Carregando..."
+                listaNoticias.innerHTML = '';
+
+                // Verifica se a requisição teve sucesso e se há notícias
+                if (dados.status === "success" && dados.results && dados.results.length > 0) {
+                    
+                    // Pega as 5 primeiras notícias para não encher a tela
+                    const top5Noticias = dados.results.slice(0, 5);
+                    
+                    top5Noticias.forEach(noticia => {
+                        // Cria o elemento da lista e o link para a notícia
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        
+                        a.href = noticia.link; // Link original da matéria
+                        a.target = '_blank';   // Abre em uma nova aba
+                        a.textContent = noticia.title; // Título da notícia
+                        
+                        // Adiciona o link à lista (li) e a (li) à (ul)
+                        li.appendChild(a);
+                        listaNoticias.appendChild(li);
+                    });
+                } else {
+                    listaNoticias.innerHTML = '<li>Não foi possível carregar as notícias de IA no momento (Verifique a chave da API).</li>';
+                }
+
+            } catch (erro) {
+                console.error('Erro ao buscar a API:', erro);
+                listaNoticias.innerHTML = '<li>Ocorreu um erro na conexão com as notícias.</li>';
+            }
+        }
+
+        // Executa a função assim que a página terminar de carregar
+        window.addEventListener('DOMContentLoaded', carregarNoticiasIA);
+    </script>
+</body>
+</html>
