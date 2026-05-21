@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chart.js — 7 Exemplos Práticos</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Chart<em>.</em>js — Exemplos Práticos</h1>
+  <p>7 exemplos funcionais usando dados de chamados de suporte. Cada gráfico aplica as técnicas descritas no material didático.</p>
+</div>
+
+<div class="container">
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="num">1</div>
+      <h2>Barras Verticais <span>— type: "bar"</span></h2>
+    </div>
+    <p class="desc">
+      Gráfico mais básico. Compara chamados por tipo (Bug vs Melhoria).
+      Cada barra recebe uma cor via <code>backgroundColor</code> como array
+      e os cantos são arredondados com <code>borderRadius: 8</code>.
+    </p>
+    <div class="chart-box h280">
+      <canvas id="chart1"></canvas>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="num">2</div>
+      <h2>Barras Empilhadas <span>— stacked: true + datalabels</span></h2>
+    </div>
+    <p class="desc">
+      Bug vs Melhoria empilhados por mês. Exige <code>scales.x.stacked: true</code>
+      e <code>scales.y.stacked: true</code>. O plugin <code>datalabels</code>
+      exibe os valores sobre cada segmento, ocultando zeros.
+    </p>
+    <div class="legend">
+      <span><i style="background:#ef4444"></i> Bug</span>
+      <span><i style="background:#6366f1"></i> Melhoria</span>
+    </div>
+    <div class="chart-box h280">
+      <canvas id="chart2"></canvas>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="num">3</div>
+      <h2>Doughnut (Rosca) <span>— type: "doughnut" + legenda customizada</span></h2>
+    </div>
+    <p class="desc">
+      Distribuição por categoria. <code>cutout: "52%"</code> controla o buraco central.
+      A legenda usa <code>generateLabels</code> para exibir a porcentagem.
+      <code>datalabels</code> só aparece em fatias &gt; 8%.
+    </p>
+    <div class="chart-box h300">
+      <canvas id="chart3"></canvas>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="num">4</div>
+      <h2>Gráfico de Linha <span>— type: "line" + fill + tension</span></h2>
+    </div>
+    <p class="desc">
+      Evolução das horas gastas por mês. <code>fill: true</code> preenche a área
+      abaixo da linha. <code>tension: 0.35</code> suaviza as curvas.
+      <code>pointBackgroundColor: "#fff"</code> cria o efeito de bolinha vazada.
+    </p>
+    <div class="chart-box h280">
+      <canvas id="chart4"></canvas>
+    </div>
+  </div>
+
+
+ 
+  <div class="card">
+    <div class="card-header">
+      <div class="num">5</div>
+      <h2>Barras Horizontais <span>— indexAxis: "y"</span></h2>
+    </div>
+    <p class="desc">
+      Tempo médio por categoria. A única mudança é <code>indexAxis: "y"</code> —
+      uma propriedade que transforma barras verticais em horizontais,
+      invertendo os papéis dos eixos X e Y.
+    </p>
+    <div class="chart-box h260">
+      <canvas id="chart5"></canvas>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="num">6</div>
+      <h2>Múltiplas Linhas <span>— 2 datasets tipo line</span></h2>
+    </div>
+    <p class="desc">
+      Duas linhas no mesmo gráfico: Bug (vermelho) e Melhoria (indigo).
+      A função <code>datalabels.color</code> lê <code>ctx.dataset.borderColor</code>
+      para que o rótulo combine com a linha correspondente.
+    </p>
+    <div class="legend">
+      <span><i style="background:#ef4444"></i> Bug</span>
+      <span><i style="background:#6366f1"></i> Melhoria</span>
+    </div>
+    <div class="chart-box h280">
+      <canvas id="chart6"></canvas>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <div class="num">7</div>
+      <h2>Destruir e Recriar <span>— chart.destroy() + referência global</span></h2>
+    </div>
+    <p class="desc">
+      O mesmo <code>&lt;canvas&gt;</code> reutilizado para 3 tipos de gráfico.
+      É <strong>obrigatório</strong> chamar <code>chart.destroy()</code> antes de criar
+      um novo no mesmo canvas. A referência fica em <code>chartEx7</code>.
+    </p>
+    <div class="btn-row">
+      <button class="btn btn-red active"     id="btnBarras" onclick="criarBarras7()">Barras</button>
+      <button class="btn btn-amber"          id="btnRosca"  onclick="criarRosca7()">Rosca</button>
+      <button class="btn btn-emerald"        id="btnLinha"  onclick="criarLinha7()">Linha</button>
+    </div>
+    <div class="chart-box h280">
+      <canvas id="chart7"></canvas>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+
+var DADOS = [
+  { tipo: "Bug",      categoria: "Leitura CNPJ",    mes: "Jan/26", horas: 1.5 },
+  { tipo: "Melhoria", categoria: "Impostos",         mes: "Jan/26", horas: 3.0 },
+  { tipo: "Bug",      categoria: "Erro OCR",         mes: "Fev/26", horas: 2.0 },
+  { tipo: "Bug",      categoria: "Valor monetário",  mes: "Fev/26", horas: 1.5 },
+  { tipo: "Melhoria", categoria: "Leitura CNPJ",    mes: "Mar/26", horas: 2.25 },
+  { tipo: "Bug",      categoria: "Erro OCR",         mes: "Mar/26", horas: 3.5 },
+  { tipo: "Bug",      categoria: "Impostos",         mes: "Abr/26", horas: 2.0 },
+  { tipo: "Bug",      categoria: "Leitura CNPJ",    mes: "Abr/26", horas: 1.25 },
+  { tipo: "Melhoria", categoria: "Valor monetário",  mes: "Abr/26", horas: 1.75 },
+  { tipo: "Melhoria", categoria: "Certificado",      mes: "Abr/26", horas: 0.5  }
+];
+
+var MESES = ["Jan/26","Fev/26","Mar/26","Abr/26"];
+var CATEGORIAS = ["Leitura CNPJ","Impostos","Erro OCR","Valor monetário","Certificado"];
+var CORES = ["#6366f1","#f59e0b","#ef4444","#10b981","#ec4899"];
+
+
+Chart.register(ChartDataLabels);
+
+
+function contarPorTipo(tipo) {
+  return DADOS.filter(function(d){ return d.tipo === tipo; }).length;
+}
+function contarPorMesTipo(mes, tipo) {
+  return DADOS.filter(function(d){ return d.mes === mes && d.tipo === tipo; }).length;
+}
+function contarPorCategoria(cat) {
+  return DADOS.filter(function(d){ return d.categoria === cat; }).length;
+}
+function horasPorMes(mes) {
+  return DADOS.filter(function(d){ return d.mes === mes; })
+              .reduce(function(s,d){ return s + d.horas; }, 0);
+}
+function mediaPorCategoria(cat) {
+  var itens = DADOS.filter(function(d){ return d.categoria === cat; });
+  if (!itens.length) return 0;
+  return +(itens.reduce(function(s,d){ return s + d.horas; }, 0) / itens.length).toFixed(2);
+}
+
+var opBase = {
+  responsive: true,
+  maintainAspectRatio: false
+};
+
+(function(){
+  var ctx = document.getElementById("chart1");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Bug","Melhoria"],
+      datasets: [{
+        label: "Quantidade de chamados",
+        data: [contarPorTipo("Bug"), contarPorTipo("Melhoria")],
+        backgroundColor: ["#ef4444","#6366f1"],
+        borderRadius: 8,
+        borderSkipped: false,
+        barThickness: 80
+      }]
+    },
+    options: Object.assign({}, opBase, {
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: "#fff",
+          font: { weight: "700", size: 14 },
+          anchor: "center",
+          align: "center"
+        }
+      },
+      scales: {
+        x: { grid: { display: false } },
+        y: { beginAtZero: true, grid: { color: "#2e334a" } }
+      }
+    })
+  });
+})();
+
+
+(function(){
+  var ctx = document.getElementById("chart2");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: MESES,
+      datasets: [
+        {
+          label: "Bug",
+          data: MESES.map(function(m){ return contarPorMesTipo(m,"Bug"); }),
+          backgroundColor: "#ef4444",
+          borderRadius: 4
+        },
+        {
+          label: "Melhoria",
+          data: MESES.map(function(m){ return contarPorMesTipo(m,"Melhoria"); }),
+          backgroundColor: "#6366f1",
+          borderRadius: 4
+        }
+      ]
+    },
+    options: Object.assign({}, opBase, {
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          display: function(ctx) {
+            return ctx.dataset.data[ctx.dataIndex] > 0;
+          },
+          color: "#fff",
+          font: { weight: "700", size: 12 },
+          anchor: "center",
+          align: "center"
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: { stacked: true, beginAtZero: true, grid: { color: "#2e334a" }, ticks: { stepSize: 1 } }
+      }
+    })
+  });
+})();
+
+
+(function(){
+  var ctx = document.getElementById("chart3");
+  var totCat = CATEGORIAS.map(contarPorCategoria);
+  var total  = totCat.reduce(function(a,b){ return a+b; }, 0);
+
+  new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: CATEGORIAS,
+      datasets: [{
+        data: totCat,
+        backgroundColor: CORES,
+        borderWidth: 2,
+        borderColor: "#1a1d27",
+        hoverOffset: 8
+      }]
+    },
+    options: Object.assign({}, opBase, {
+      cutout: "52%",
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            color: "#94a3b8",
+            font: { size: 12 },
+            generateLabels: function(chart) {
+              var ds = chart.data.datasets[0];
+              return chart.data.labels.map(function(label, i) {
+                var pct = (ds.data[i] / total * 100).toFixed(1);
+                return {
+                  text: label + " (" + pct + "%)",
+                  fillStyle: ds.backgroundColor[i],
+                  strokeStyle: ds.borderColor,
+                  lineWidth: ds.borderWidth,
+                  hidden: false,
+                  index: i
+                };
+              });
+            }
+          }
+        },
+        datalabels: {
+          display: function(ctx) {
+            return (ctx.dataset.data[ctx.dataIndex] / total) > 0.08;
+          },
+          color: "#fff",
+          font: { weight: "700", size: 12 },
+          formatter: function(v) { return v; }
+        }
+      }
+    })
+  });
+})();
+
+
+(function(){
+  var ctx = document.getElementById("chart4");
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: MESES,
+      datasets: [{
+        label: "Horas gastas",
+        data: MESES.map(horasPorMes),
+        borderColor: "#6366f1",
+        backgroundColor: "#6366f118",
+        fill: true,
+        tension: 0.35,
+        pointRadius: 6,
+        pointBackgroundColor: "#fff",
+        pointBorderWidth: 2.5,
+        pointBorderColor: "#6366f1"
+      }]
+    },
+    options: Object.assign({}, opBase, {
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: "#6366f1",
+          font: { weight: "700", size: 11 },
+          anchor: "top",
+          align: "top",
+          formatter: function(v) { return v.toFixed(1) + "h"; }
+        }
+      },
+      scales: {
+        x: { grid: { color: "#2e334a" } },
+        y: {
+          beginAtZero: true,
+          grid: { color: "#2e334a" },
+          ticks: { callback: function(v) { return v + "h"; } }
+        }
+      }
+    })
+  });
+})();
+
+
+(function(){
+  var ctx = document.getElementById("chart5");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: CATEGORIAS,
+      datasets: [{
+        label: "Tempo médio (h)",
+        data: CATEGORIAS.map(mediaPorCategoria),
+        backgroundColor: CORES,
+        borderRadius: 6
+      }]
+    },
+    options: Object.assign({}, opBase, {
+      indexAxis: "y",
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: "#fff",
+          font: { weight: "700", size: 11 },
+          anchor: "end",
+          align: "start",
+          formatter: function(v) { return v + "h"; }
+        }
+      },
+      scales: {
+        x: { beginAtZero: true, grid: { color: "#2e334a" }, ticks: { callback: function(v){ return v+"h"; } } },
+        y: { grid: { display: false } }
+      }
+    })
+  });
+})();
+
+
+(function(){
+  var ctx = document.getElementById("chart6");
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: MESES,
+      datasets: [
+        {
+          label: "Bug",
+          data: MESES.map(function(m){ return contarPorMesTipo(m,"Bug"); }),
+          borderColor: "#ef4444",
+          backgroundColor: "#ef444418",
+          fill: true,
+          tension: 0.35,
+          pointRadius: 6,
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 2.5,
+          pointBorderColor: "#ef4444"
+        },
+        {
+          label: "Melhoria",
+          data: MESES.map(function(m){ return contarPorMesTipo(m,"Melhoria"); }),
+          borderColor: "#6366f1",
+          backgroundColor: "#6366f118",
+          fill: true,
+          tension: 0.35,
+          pointRadius: 6,
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 2.5,
+          pointBorderColor: "#6366f1"
+        }
+      ]
+    },
+    options: Object.assign({}, opBase, {
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          color: function(ctx) { return ctx.dataset.borderColor; },
+          font: { weight: "700", size: 11 },
+          anchor: "top",
+          align: "top"
+        }
+      },
+      scales: {
+        x: { grid: { color: "#2e334a" } },
+        y: {
+          beginAtZero: true,
+          grid: { color: "#2e334a" },
+          ticks: { stepSize: 1 }
+        }
+      }
+    })
+  });
+})();
+
+
+var chartEx7 = null;
+
+function setActiveBtn(id) {
+  ["btnBarras","btnRosca","btnLinha"].forEach(function(bid){
+    document.getElementById(bid).classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function criarBarras7() {
+  setActiveBtn("btnBarras");
+  var ctx = document.getElementById("chart7");
+  if (chartEx7) { chartEx7.destroy(); chartEx7 = null; }
+  chartEx7 = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: MESES,
+      datasets: [
+        { label:"Bug",      data: MESES.map(function(m){return contarPorMesTipo(m,"Bug");}),      backgroundColor:"#ef4444", borderRadius:6 },
+        { label:"Melhoria", data: MESES.map(function(m){return contarPorMesTipo(m,"Melhoria");}), backgroundColor:"#6366f1", borderRadius:6 }
+      ]
+    },
+    options: Object.assign({}, opBase, {
+      plugins: { legend:{ labels:{ color:"#94a3b8" } }, datalabels:{ display:false } },
+      scales: {
+        x: { grid:{ display:false }, ticks:{ color:"#94a3b8" } },
+        y: { beginAtZero:true, grid:{ color:"#2e334a" }, ticks:{ stepSize:1, color:"#94a3b8" } }
+      }
+    })
+  });
+}
+
+function criarRosca7() {
+  setActiveBtn("btnRosca");
+  var ctx = document.getElementById("chart7");
+  if (chartEx7) { chartEx7.destroy(); chartEx7 = null; }
+  var totCat = CATEGORIAS.map(contarPorCategoria);
+  chartEx7 = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: CATEGORIAS,
+      datasets: [{ data:totCat, backgroundColor:CORES, borderWidth:2, borderColor:"#1a1d27", hoverOffset:8 }]
+    },
+    options: Object.assign({}, opBase, {
+      cutout:"52%",
+      plugins: {
+        legend:{ position:"right", labels:{ color:"#94a3b8", font:{size:11} } },
+        datalabels:{ display:false }
+      }
+    })
+  });
+}
+
+function criarLinha7() {
+  setActiveBtn("btnLinha");
+  var ctx = document.getElementById("chart7");
+  if (chartEx7) { chartEx7.destroy(); chartEx7 = null; }
+  chartEx7 = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: MESES,
+      datasets: [{
+        label:"Horas gastas",
+        data: MESES.map(horasPorMes),
+        borderColor:"#10b981",
+        backgroundColor:"#10b98118",
+        fill:true,
+        tension:0.35,
+        pointRadius:6,
+        pointBackgroundColor:"#fff",
+        pointBorderWidth:2.5,
+        pointBorderColor:"#10b981"
+      }]
+    },
+    options: Object.assign({}, opBase, {
+      plugins: {
+        legend:{ display:false },
+        datalabels:{ display:false }
+      },
+      scales: {
+        x: { grid:{ color:"#2e334a" }, ticks:{ color:"#94a3b8" } },
+        y: { beginAtZero:true, grid:{ color:"#2e334a" }, ticks:{ color:"#94a3b8", callback:function(v){return v+"h";} } }
+      }
+    })
+  });
+}
+
+// Inicializa exemplo 7 com barras
+criarBarras7();
+
+</script>
+
+</body>
+</html>
