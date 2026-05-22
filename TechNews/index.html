@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Uberlândia Notícias - Home</title>
+    <link rel="shortcut icon" href="imagens/logo.png" type="image/x-icon">
+    <title> TechNews - Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>Portal Uberlândia Notícias</h1>
-        <p>A sua fonte diária de informações sobre o Triângulo Mineiro</p>
-        <img src="logo.png" alt="Logo do Portal">
+        <h1>TechNews</h1>
+        <p>A sua fonte diária de informações sobre Tecnologia</p>
+        <img src="imagens/logo.png" alt="Logo do Portal">
     </header>
 
     <nav>
@@ -31,19 +32,7 @@
             </li>
         </ul>
     </nav>
-
     <main>
-        <section>
-            <h2>Destaques da Semana em Uberlândia</h2>
-            <ol>
-                <li><a href="ips-triangulo-mineiro.html">Uberlândia, Uberaba e Araguari formam "corredor de excelência" no Índice de Progresso Social 2026.</a></li>
-                <li><a href="figurinhas-uberlandia.html">Guia completo: onde trocar figurinhas em Uberlândia — confira os pontos, horários e dicas dos colecionadores.</a></li>
-                <li>Novo parque tecnológico é inaugurado no setor leste.</li>
-                <li>Time de vôlei local vence o campeonato regional.</li>
-                <li>Exposição de arte no Mercado Municipal começa amanhã.</li>
-            </ol>
-        </section>
-
         <section>
             <h2>Radar Tecnológico: Inteligência Artificial</h2>
             <ul id="noticias-ia">
@@ -59,7 +48,7 @@
     <script>
         async function carregarNoticiasIA() {
             // Lembre-se de substituir YOUR_API_KEY pela sua chave da NewsData.io!
-            const url = 'https://newsdata.io/api/1/latest?apikey=pub_9af72661c06747239aa4acb3e2af3b20&q=inteligencia%20artificial';
+            const url = 'https://newsdata.io/api/1/latest?apikey=pub_9af72661c06747239aa4acb3e2af3b20&category=technology&language=pt';
             const listaNoticias = document.getElementById('noticias-ia');
 
             try {
