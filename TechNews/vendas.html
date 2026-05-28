@@ -50,8 +50,39 @@
                 </p>
                 <button type="submit">Enviar Solicitação</button>
             </form>
+            <p id="msg-vendas" style="margin-top:1rem; font-family:var(--font-ui); font-size:.95rem;"></p>
         </section>
     </main>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const msg = document.getElementById('msg-vendas');
+            msg.textContent = 'Enviando...';
+            msg.style.color = 'var(--muted)';
+
+            try {
+                const res = await fetch('http://localhost:5000/api/vendas', {
+                    method: 'POST',
+                    body: new FormData(this)
+                });
+                const json = await res.json();
+
+                if (json.ok) {
+                    msg.textContent = '✅ ' + json.message;
+                    msg.style.color = '#2eaa6e';
+                    this.reset();
+                } else {
+                    msg.textContent = '❌ ' + json.message;
+                    msg.style.color = '#c0392b';
+                }
+            } catch (e) {
+                msg.textContent = '❌ Não foi possível conectar ao servidor.';
+                msg.style.color = '#c0392b';
+            }
+        });
+    </script>
 
     <footer>
         <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>

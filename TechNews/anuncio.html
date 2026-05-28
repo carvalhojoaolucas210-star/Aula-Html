@@ -46,8 +46,41 @@
                 </p>
                 <button type="submit">Salvar Configurações</button>
             </form>
+            <p id="msg-anuncio" style="margin-top:1rem; font-family:var(--font-ui); font-size:.95rem;"></p>
         </section>
     </main>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const msg = document.getElementById('msg-anuncio');
+            msg.textContent = 'Enviando...';
+            msg.style.color = 'var(--muted)';
+
+            try {
+                // FormData já inclui o arquivo de imagem (multipart/form-data)
+                const res = await fetch('http://localhost:5000/api/anuncios', {
+                    method: 'POST',
+                    body: new FormData(this)
+                });
+                const json = await res.json();
+
+                if (json.ok) {
+                    const token = json.data?.token_painel ? ` Token do painel: ${json.data.token_painel}` : '';
+                    msg.textContent = '✅ ' + json.message + token;
+                    msg.style.color = '#2eaa6e';
+                    this.reset();
+                } else {
+                    msg.textContent = '❌ ' + json.message;
+                    msg.style.color = '#c0392b';
+                }
+            } catch (e) {
+                msg.textContent = '❌ Não foi possível conectar ao servidor.';
+                msg.style.color = '#c0392b';
+            }
+        });
+    </script>
 
     <footer>
         <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
