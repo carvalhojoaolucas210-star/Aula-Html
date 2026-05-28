@@ -34,7 +34,7 @@
     </nav>
     <main>
         <section>
-            <h2>Radar Tecnológico: Inteligência Artificial</h2>
+            <h2>Radar Tecnológico</h2>
             <ul id="noticias-ia">
                 <li>Carregando últimas notícias...</li>
             </ul>
@@ -45,51 +45,97 @@
         <p>&copy; 2026 — Trabalho de Tecnologias para Internet I — Uniube</p>
     </footer>
 
-    <script>
-        async function carregarNoticiasIA() {
-            // Lembre-se de substituir YOUR_API_KEY pela sua chave da NewsData.io!
-            const url = 'https://newsdata.io/api/1/latest?apikey=pub_9af72661c06747239aa4acb3e2af3b20&category=technology&language=pt';
-            const listaNoticias = document.getElementById('noticias-ia');
+<script>
+    async function carregarNoticiasIA() {
+        const url = 'https://newsdata.io/api/1/latest?apikey=pub_9af72661c06747239aa4acb3e2af3b20&category=technology&language=pt';
+        const listaNoticias = document.getElementById('noticias-ia');
 
-            try {
-                // Faz a requisição HTTP para a API
-                const resposta = await fetch(url);
-                const dados = await resposta.json();
+        try {
+            // Faz a requisição HTTP para a API
+            const resposta = await fetch(url);
+            const dados = await resposta.json();
 
-                // Limpa a mensagem de "Carregando..."
-                listaNoticias.innerHTML = '';
+            // Limpa a mensagem de "Carregando..."
+            listaNoticias.innerHTML = '';
 
-                // Verifica se a requisição teve sucesso e se há notícias
-                if (dados.status === "success" && dados.results && dados.results.length > 0) {
+            // Verifica se a requisição teve sucesso e se há notícias
+            if (dados.status === "success" && dados.results && dados.results.length > 0) {
+                
+                // Pega as 5 primeiras notícias para não encher a tela
+                const top5Noticias = dados.results.slice(0, 5);
+                
+                top5Noticias.forEach(noticia => {
+                    // Cria os elementos básicos
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
                     
-                    // Pega as 5 primeiras notícias para não encher a tela
-                    const top5Noticias = dados.results.slice(0, 5);
-                    
-                    top5Noticias.forEach(noticia => {
-                        // Cria o elemento da lista e o link para a notícia
-                        const li = document.createElement('li');
-                        const a = document.createElement('a');
-                        
-                        a.href = noticia.link; // Link original da matéria
-                        a.target = '_blank';   // Abre em uma nova aba
-                        a.textContent = noticia.title; // Título da notícia
-                        
-                        // Adiciona o link à lista (li) e a (li) à (ul)
-                        li.appendChild(a);
-                        listaNoticias.appendChild(li);
-                    });
-                } else {
-                    listaNoticias.innerHTML = '<li>Não foi possível carregar as notícias de IA no momento (Verifique a chave da API).</li>';
-                }
+                    // Adiciona um espaçamento entre cada item da lista (notícia)
+                    li.style.marginBottom = '15px';
+                    li.style.listStyleType = 'none'; // Remove a bolinha padrão para o visual ficar mais limpo
 
-            } catch (erro) {
-                console.error('Erro ao buscar a API:', erro);
-                listaNoticias.innerHTML = '<li>Ocorreu um erro na conexão com as notícias.</li>';
+                    // Configura o link de destino
+                    a.href = noticia.link;
+                    a.target = '_blank';
+                    
+                    // Aplica estilo no link para que o texto fique alinhado perfeitamente com o meio da imagem
+                    a.style.display = 'inline-block';
+                    a.style.verticalAlign = 'middle';
+                    a.style.textDecoration = 'none'; // Opcional: remove o sublinhado se preferir
+                    a.style.color = '#0066cc'; // Mantém uma cor de link visível
+
+                    // Verifica se a notícia possui uma imagem
+                    if (noticia.image_url) {
+                        const img = document.createElement('img');
+                        img.src = noticia.image_url;
+                        img.alt = 'Miniatura';
+                        
+                        // Configura a imagem menor e alinhada ao lado esquerdo do texto
+                        img.style.width = '80px';          // Largura reduzida (estilo miniatura)
+                        img.style.height = '55px';         // Altura fixa para manter um padrão visual
+                        img.style.objectFit = 'cover';     // Corta a imagem proporcionalmente sem distorcer
+                        img.style.borderRadius = '4px';    // Cantos suavemente arredondados
+                        img.style.marginRight = '12px';    // Espaçamento horizontal entre a imagem e o texto
+                        img.style.display = 'inline-block';
+                        img.style.verticalAlign = 'middle';
+                        
+                        // Adiciona a imagem dentro do link (assim a imagem também é clicável!)
+                        a.appendChild(img);
+                    } else {
+                        // Caso a notícia não tenha imagem, cria um pequeno quadrado cinza de tamanho idêntico
+                        // Isso mantém o alinhamento do texto perfeito mesmo sem foto
+                        const semImg = document.createElement('div');
+                        semImg.style.width = '80px';
+                        semImg.style.height = '55px';
+                        semImg.style.backgroundColor = '#e0e0e0';
+                        semImg.style.borderRadius = '4px';
+                        semImg.style.marginRight = '12px';
+                        semImg.style.display = 'inline-block';
+                        semImg.style.verticalAlign = 'middle';
+                        
+                        a.appendChild(semImg);
+                    }
+                    
+                    // Cria o nó de texto com o título da notícia e adiciona após a imagem
+                    const textoTitulo = document.createElement('span');
+                    textoTitulo.textContent = noticia.title;
+                    a.appendChild(textoTitulo);
+                    
+                    // Coloca o link estruturado dentro do li, e o li na lista principal
+                    li.appendChild(a);
+                    listaNoticias.appendChild(li);
+                });
+            } else {
+                listaNoticias.innerHTML = '<li>Não foi possível carregar as notícias de IA no momento.</li>';
             }
-        }
 
-        // Executa a função assim que a página terminar de carregar
-        window.addEventListener('DOMContentLoaded', carregarNoticiasIA);
-    </script>
+        } catch (erro) {
+            console.error('Erro ao buscar a API:', erro);
+            listaNoticias.innerHTML = '<li>Ocorreu um erro na conexão com as notícias.</li>';
+        }
+    }
+
+    // Executa a função assim que a página terminar de carregar
+    window.addEventListener('DOMContentLoaded', carregarNoticiasIA);
+</script>
 </body>
 </html>
